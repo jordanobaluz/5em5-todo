@@ -5,7 +5,7 @@ import { ListItem } from "./components/ListItem";
 import { AddArea } from "./components/AddArea";
 
 const App = () => {
-  const [list, setList] = useState<Item[]>([
+  const data = [
     {
       id: 1,
       name: "comprar pão",
@@ -16,7 +16,11 @@ const App = () => {
       name: "comprar leite",
       done: false,
     },
-  ]);
+  ];
+  const [list, setList] = useState<Item[]>(() => {
+    const saved = localStorage.getItem("task");
+    return JSON.parse(saved!) || data;
+  });
 
   const handleAddTask = (taskName: string) => {
     let newList = [...list];
@@ -26,6 +30,8 @@ const App = () => {
       done: false,
     });
     setList(newList);
+    localStorage.setItem("task", JSON.stringify(newList));
+    data.push(...list);
   };
 
   const handleTaskChange = (id: number, done: boolean) => {
@@ -36,6 +42,8 @@ const App = () => {
       }
     }
     setList(newList);
+    localStorage.setItem("task", JSON.stringify(newList));
+    data.push(...list);
   };
 
   return (
