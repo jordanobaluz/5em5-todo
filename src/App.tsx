@@ -46,6 +46,18 @@ const App = () => {
     data.push(...list);
   };
 
+  const deleteItem = (id: number) => {
+    let newList = [...list];
+    for (let i in newList) {
+      if (newList[i].id === id) {
+        newList.splice(parseInt(i), 1);
+      }
+    }
+    setList(newList);
+    localStorage.setItem("task", JSON.stringify(newList));
+    data.push(...list);
+  };
+
   return (
     <C.Container>
       <C.Area>
@@ -54,7 +66,12 @@ const App = () => {
         <AddArea onEnter={handleAddTask} />
 
         {list.map((item, index) => (
-          <ListItem key={index} item={item} onChange={handleTaskChange} />
+          <ListItem
+            key={index}
+            item={item}
+            onChange={handleTaskChange}
+            onClick={deleteItem}
+          />
         ))}
       </C.Area>
     </C.Container>

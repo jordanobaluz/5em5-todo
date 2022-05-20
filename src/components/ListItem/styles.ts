@@ -5,11 +5,12 @@ type ContainerProps = {
 export const Container = styled.div(
   ({ done }: ContainerProps) => `
 display: flex;
-background-color: #20212c;
+background-color: #232946;
 padding: 10px;
 border-radius: 10px;
 margin-bottom: 10px;
 align-items: center;
+justify-content: space-between;
 
 input {
   width: 25px;
@@ -18,8 +19,12 @@ input {
 }
 
 label {
-  color: #ccc;
-  text-decoration: ${done ? "line-through" : "initial"} 
+  color: #FFFFFE;
+  text-decoration: ${done ? "line-through" : "initial"};
+  width: -webkit-fill-available; 
+}
+button {
+  background-color: #FFFFFE
 }
 `
 );
